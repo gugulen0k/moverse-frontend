@@ -15,12 +15,13 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-
 import {ImFacebook, ImGoogle} from "react-icons/im";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
+import axios from "axios"
 
 import { signUpSchema } from '../schemas/signUp'
+import { useAuthenticateStore } from "../stores/authorization"
 
 export default function SignUp() {
   const form = useForm({
@@ -34,9 +35,7 @@ export default function SignUp() {
     }
   })
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  const signUpUser = useAuthenticateStore(state => state.signUp)
 
   return (
     <Card>
@@ -70,7 +69,7 @@ export default function SignUp() {
         </div>
 
         <Form {...form}>
-          <form className="grid gap-2" onSubmit={form.handleSubmit(onSubmit)}>
+          <form className="grid gap-2" onSubmit={form.handleSubmit(signUpUser)}>
             <FormField control={form.control}
                        name="email"
                        render={({ field }) => (
