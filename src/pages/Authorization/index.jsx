@@ -1,12 +1,13 @@
-import { useTheme } from "@/components/theme-provider.jsx"
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
+import { useTheme } from "@/shared/ui/theme-provider"
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/shared/ui/tabs"
+import { Button } from "@/shared/ui/button"
 
 import {BsMoonFill, BsSunFill} from "react-icons/bs"
-import {ImArrowLeft2} from "react-icons/im"
+import { ImArrowLeft2 as ArrowLeftIcon } from "react-icons/im"
 
-import LogIn from "./components/LogIn"
-import SignUp from "./components/SignUp"
+import LogIn from "./LogIn"
+import SignUp from "./SignUp"
+import { Link } from "react-router-dom"
 
 export default function Authorization() {
   const { theme, setTheme } = useTheme()
@@ -17,7 +18,9 @@ export default function Authorization() {
         <Button className="absolute top-3 left-3"
                 variant="ghost"
                 size="icon">
-          <ImArrowLeft2 className="text-2xl"/>
+          <Link to='/'>
+            <ArrowLeftIcon className="text-2xl"/>
+          </Link>
         </Button>
         <div className="">
           <Tabs defaultValue="logIn" className="w-[30rem]">

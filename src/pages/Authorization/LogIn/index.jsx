@@ -4,7 +4,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/shared/ui/card"
 import {
   Form,
   FormControl,
@@ -12,14 +12,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+} from "@/shared/ui/form"
+import { Input } from "@/shared/ui/input"
+import { Button } from "@/shared/ui/button"
 
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 
-import { logInSchema } from "../schemas/logIn"
+import { logInSchema } from "./schema"
 
 export default function LogIn() {
   const form = useForm({

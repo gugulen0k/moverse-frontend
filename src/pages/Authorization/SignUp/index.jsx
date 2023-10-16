@@ -4,7 +4,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from '@/shared/ui/card'
 import {
   Form,
   FormControl,
@@ -12,16 +12,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import {ImFacebook, ImGoogle} from "react-icons/im";
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import axios from "axios"
+} from '@/shared/ui/form'
+import { Input } from '@/shared/ui/input'
+import { Button } from '@/shared/ui/button'
+import {ImFacebook, ImGoogle} from 'react-icons/im'
+import { BiLoaderAlt as LoaderIcon } from 'react-icons/bi'
 
-import { signUpSchema } from '../schemas/signUp'
-import { useAuthenticateStore } from "../stores/authorization"
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+
+import { signUpSchema } from './schema'
+import { useSignUp } from '../hooks/useSignUp'
 
 export default function SignUp() {
   const form = useForm({
@@ -35,7 +36,8 @@ export default function SignUp() {
     }
   })
 
-  const signUpUser = useAuthenticateStore(state => state.signUp)
+  const { mutate, isLoading } = useSignUp()
+  const onSubmit = (user) => { mutate(user) }
 
   return (
     <Card>
@@ -69,7 +71,7 @@ export default function SignUp() {
         </div>
 
         <Form {...form}>
-          <form className="grid gap-2" onSubmit={form.handleSubmit(signUpUser)}>
+          <form className="grid gap-2" onSubmit={form.handleSubmit(onSubmit)}>
             <FormField control={form.control}
                        name="email"
                        render={({ field }) => (
@@ -128,7 +130,8 @@ export default function SignUp() {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full mt-4">
+            <Button type="submit" disabled={isLoading} className='w-full mt-4 flex gap-2'>
+              <LoaderIcon className={`${isLoading ? 'block animate-spin' : 'hidden'}`} />
               Create account
             </Button>
           </form>
