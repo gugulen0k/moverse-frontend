@@ -1,19 +1,18 @@
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 
-import userServices from '../services/user'
-import { useAuthenticateStore } from '../store/authorization'
+import userServices from '@/shared/lib/api/user'
+import { USER_SIGNUP } from '@/shared/lib/constants'
 import { useToast } from '@/shared/ui/toaster/use-toast'
-import { USER_SIGNUP } from '../constants'
-
+import { useUserStore } from '@/shared/lib/stores/user'
 
 export const useSignUp = () => {
   const { toast } = useToast()
-  const { setUserInfo } = useAuthenticateStore()
+  const { setUserInfo } = useUserStore()
   const navigate = useNavigate()
 
   return useMutation({
-    mutationKey: [USER_SIGNUP],
+    mutationKey: [ USER_SIGNUP ],
     mutationFn: ({ email, username, password, confirmPassword }) => {
       return userServices.signUp({
         email: email,
@@ -34,7 +33,7 @@ export const useSignUp = () => {
     },
     onError: (error) => {
       const errors = error.response.data.errors.full_messages
-      const errorMsg = errors.map((error) => `- ${error}`).join('\n')
+      const errorMsg = errors.length <= 1 ? errors[0] : errors.map((error) => `- ${error}`).join('\n')
 
       toast({
         variant: 'destructive',

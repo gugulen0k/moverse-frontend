@@ -21,8 +21,8 @@ import { BiLoaderAlt as LoaderIcon } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { signUpSchema } from './schema'
-import { useSignUp } from '../hooks/useSignUp'
+import { signUpSchema } from '../../lib/schemas/signUp'
+import { useSignUp } from '../../lib/hooks/useSignUp'
 
 export default function SignUp() {
   const form = useForm({
@@ -130,8 +130,8 @@ export default function SignUp() {
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isLoading} className='w-full mt-4 flex gap-2'>
-              <LoaderIcon className={`${isLoading ? 'block animate-spin' : 'hidden'}`} />
+            <Button type="submit" disabled={ isLoading } className='w-full mt-4 flex gap-2'>
+              <LoaderIcon className={`${ isLoading ? 'block animate-spin' : 'hidden' }`} />
               Create account
             </Button>
           </form>

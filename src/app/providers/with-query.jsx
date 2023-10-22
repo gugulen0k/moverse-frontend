@@ -6,6 +6,6 @@ const  queryClient = new QueryClient()
 export const withQuery = (component) => () => (
   <QueryClientProvider client={ queryClient }>
     { component() }
-    <ReactQueryDevtools/>
+    { /*<ReactQueryDevtools/>*/}
   </QueryClientProvider>
 )

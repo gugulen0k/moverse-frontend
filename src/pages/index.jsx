@@ -1,15 +1,30 @@
 import { lazy } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+
+import Sidebar from "./Home/components/Sidebar";
 
 const Authorization = lazy(() => import('./Authorization'))
 const Home = lazy(() => import('./Home'))
 
+const WithSidebar = () => {
+  return (
+    <>
+      <Sidebar className='h-full w-max'/>
+      <Outlet />
+    </>
+  )
+}
+
 export const Routing = () => {
   return (
-    <Routes>
-      <Route path='/' element={ <Home /> }/>
-      <Route path="*" element={ <Navigate to="/" /> }/>
-      <Route path='/authorization' element={ <Authorization /> }/>
-    </Routes>
+    <div className='h-screen'>
+      <Routes>
+        <Route path='/authorization' element={<Authorization />}/>
+        <Route element={<WithSidebar />}>
+          <Route path="*" element={<Navigate to="/" />}/>
+          <Route path='/' element={<Home />}/>
+        </Route>
+      </Routes>
+    </div>
   )
 }

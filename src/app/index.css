@@ -78,4 +78,8 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .grid-sidebar {
+    @apply grid grid-rows-[max-content_1fr_max-content] gap-4
+  }
 }

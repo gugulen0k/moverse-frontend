@@ -4,7 +4,7 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/shared/ui/card"
+} from '@/shared/ui/card'
 import {
   Form,
   FormControl,
@@ -12,28 +12,29 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/shared/ui/form"
-import { Input } from "@/shared/ui/input"
-import { Button } from "@/shared/ui/button"
+} from '@/shared/ui/form'
+import { Input } from '@/shared/ui/input'
+import { Button } from '@/shared/ui/button'
+import { BiLoaderAlt as LoaderIcon } from 'react-icons/bi'
 
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import { logInSchema } from "./schema"
+import { logInSchema } from '../../lib/schemas/logIn'
+import { useLogIn } from '../../lib/hooks/useLogIn'
 
 export default function LogIn() {
   const form = useForm({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(logInSchema),
     defaultValues: {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     }
   })
 
-  const onSubmit = (data) => {
-    console.log(data)
-  }
+  const { mutate, isLoading } = useLogIn()
+  const onSubmit = (data) => { mutate(data) }
 
   return (
     <Card>
@@ -47,7 +48,7 @@ export default function LogIn() {
       <CardContent className="space-y-2">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-2">
-            <FormField control={form.control}
+            <FormField control={ form.control }
                        name="email"
                        render={({ field }) => (
                 <FormItem>
@@ -62,7 +63,7 @@ export default function LogIn() {
                 </FormItem>
               )}
             />
-            <FormField control={form.control}
+            <FormField control={ form.control }
                        name="password"
                        render={({ field }) => (
                 <FormItem>
@@ -78,8 +79,9 @@ export default function LogIn() {
               )}
             />
 
-            <Button type="submit" className="w-full mt-4">
-              Log In
+            <Button type="submit" disabled={ isLoading } className='w-full mt-4 flex gap-2'>
+              <LoaderIcon className={`${ isLoading ? 'block animate-spin' : 'hidden' }`} />
+              Create account
             </Button>
           </form>
         </Form>

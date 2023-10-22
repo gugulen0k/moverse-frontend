@@ -11,6 +11,10 @@ class UserServices {
   async logIn(credentials) {
     return this.baseAxios.post(`${this.baseURL}/sign_in`, credentials)
   }
+
+  async logOut() {
+    return this.baseAxios.delete(`${this.baseURL}/sign_out`)
+  }
 }
 
 export default new UserServices()

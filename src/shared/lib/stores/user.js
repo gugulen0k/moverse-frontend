@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist, devtools } from 'zustand/middleware'
 
-export const useAuthenticateStore = create(
+export const useUserStore = create(
   devtools(
     persist(
       (set) => ({
