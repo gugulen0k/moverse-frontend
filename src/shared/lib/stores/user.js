@@ -7,7 +7,7 @@ export const useUserStore = create(
       (set) => ({
         userInfo: {},
         setUserInfo: (user) => set({ userInfo: user }),
-        clearUserInfo: () => set({ userInfo: {} }, true)
+        clearUserInfo: () => set({ userInfo: {} })
       }),
       { name: "user-info" }
     )
