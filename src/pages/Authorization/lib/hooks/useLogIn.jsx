@@ -8,7 +8,7 @@ import { useUserStore } from '@/shared/lib/stores/user'
 
 export const useLogIn = () => {
   const { toast } = useToast()
-  const { setUserInfo }  = useUserStore()
+  const setUserInfo = useUserStore(state => state.setUserInfo)
   const navigate = useNavigate()
   
   return useMutation({

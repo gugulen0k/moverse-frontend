@@ -8,7 +8,7 @@ import { useUserStore } from '@/shared/lib/stores/user'
 
 export const useSignUp = () => {
   const { toast } = useToast()
-  const { setUserInfo } = useUserStore()
+  const setUserInfo = useUserStore(state => state.setUserInfo)
   const navigate = useNavigate()
 
   return useMutation({
@@ -22,7 +22,7 @@ export const useSignUp = () => {
       })
     },
     onSuccess: (data) => {
-      setUserInfo(data.data)
+      setUserInfo(data.data.data)
 
       toast({
         variant: 'success',
