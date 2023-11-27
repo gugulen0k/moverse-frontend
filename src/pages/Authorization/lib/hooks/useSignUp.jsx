@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 
 import userServices from '@/shared/lib/api/user'
-import { USER_SIGNUP } from '@/shared/lib/constants'
+import { USER, SIGNUP } from '@/shared/lib/constants'
 import { useToast } from '@/shared/ui/toaster/use-toast'
 import { useUserStore } from '@/shared/lib/stores/user'
 
@@ -12,7 +12,7 @@ export const useSignUp = () => {
   const navigate = useNavigate()
 
   return useMutation({
-    mutationKey: [ USER_SIGNUP ],
+    mutationKey: [USER, SIGNUP],
     mutationFn: ({ email, username, password, confirmPassword }) => {
       return userServices.signUp({
         email: email,

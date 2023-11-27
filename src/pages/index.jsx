@@ -17,7 +17,7 @@ const WithSidebar = () => {
 
 export const Routing = () => {
   return (
-    <div className='h-screen'>
+    <div className='h-screen flex'>
       <Routes>
         <Route path='/authorization' element={<Authorization />}/>
         <Route element={<WithSidebar />}>

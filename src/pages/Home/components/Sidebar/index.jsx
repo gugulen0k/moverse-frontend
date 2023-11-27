@@ -30,20 +30,45 @@ import {
   DropdownMenuGroup 
 } from '@/shared/ui/dropdown-menu'
 import { cn } from '@/shared/lib/utils'
-import { isObjectEmpty } from '@/shared/lib/utils'
 import { useUserStore } from '@/shared/lib/stores/user'
 import { capitalize } from '@/shared/lib/utils'
 import { useLogOut } from './lib/hooks/useLogOut'
+import { isObjectEmpty } from '@/shared/lib/utils'
+
+const AdditionalPages = () => {
+  return (
+    <div>
+      <div className=''>
+        <Button variant='ghost'
+          size='lg'
+          className='p-4 text-base font-semibold w-full flex justify-start gap-2'>
+          <CollectionsIcon size={20}/> Collections
+        </Button>
+        <Button variant='ghost'
+          size='lg'
+          className='p-4 text-base font-semibold w-full flex justify-start gap-2'>
+          <HeartIcon size={20}/> Favorite
+        </Button>
+        <Button variant='ghost'
+          size='lg'
+          className='p-4 text-base font-semibold w-full flex justify-start gap-2'>
+          <FriendsIcon size={20}/> Friends
+        </Button>
+      </div>
+    </div>
+  )
+}
 
 export default function Sidebar({ className }) {
   const { theme, setTheme } = useTheme()
-  const userInfo = useUserStore(state => state.userInfo)
+  const userInfo = useUserStore((state) => state.userInfo)
+  const isUserLoggedIn = useUserStore((state) => state.isUserLoggedIn)
   const { mutate } = useLogOut()
 
   const logOut = () => { mutate() }
   
   return (
-    <div className={cn('flex flex-col gap-1 border-r', className) }>
+    <div className={cn('border-r', className) }>
       <div className='w-full h-full p-4 grid-sidebar'>
         <Button asChild variant='ghost' size='lg'>
           <Link to='/' className='mb-4 flex gap-2 text-start text-xl font-extrabold uppercase'>
@@ -79,23 +104,16 @@ export default function Sidebar({ className }) {
             <MasksIcon size={20}/> Actors
           </Button>
 
-          <Separator className='h-[2px]'/>
 
-          <Button variant='ghost'
-                  size='lg'
-                  className='p-4 text-base font-semibold w-full flex justify-start gap-2'>
-            <CollectionsIcon size={20}/> Collections
-          </Button>
-          <Button variant='ghost'
-                  size='lg'
-                  className='p-4 text-base font-semibold w-full flex justify-start gap-2'>
-            <HeartIcon size={20}/> Favorite
-          </Button>
-          <Button variant='ghost'
-                  size='lg'
-                  className='p-4 text-base font-semibold w-full flex justify-start gap-2'>
-            <FriendsIcon size={20}/> Friends
-          </Button>
+          { 
+            isUserLoggedIn && (
+              <div className='flex flex-col gap-2'>
+                <Separator className='h-[2px]'/>
+
+                <AdditionalPages />
+              </div>
+            )
+          }
         </div>
 
         <div className='w-full flex justify-between'>

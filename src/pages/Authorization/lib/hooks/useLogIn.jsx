@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
 import userServices from '@/shared/lib/api/user'
-import { USER_LOGIN } from '@/shared/lib/constants'
+import { USER, LOGIN } from '@/shared/lib/constants'
 import { useToast } from '@/shared/ui/toaster/use-toast'
 import { useUserStore } from '@/shared/lib/stores/user'
 
@@ -12,7 +12,7 @@ export const useLogIn = () => {
   const navigate = useNavigate()
   
   return useMutation({
-    mutationKey: [ USER_LOGIN ],
+    mutationKey: [USER, LOGIN],
     mutationFn: (credentials) => { 
       return userServices.logIn(credentials)
     },

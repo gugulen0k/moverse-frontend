@@ -6,8 +6,20 @@ export const useUserStore = create(
     persist(
       (set) => ({
         userInfo: {},
+<<<<<<< Updated upstream
         setUserInfo: (user) => set({ userInfo: user }),
         clearUserInfo: () => set({ userInfo: {} })
+=======
+        isUserLoggedIn: false,
+        setUserInfo: (user) => set({ 
+          userInfo: user,
+          isUserLoggedIn: true
+        }),
+        clearUserInfo: () => set({ 
+          userInfo: {},
+          isUserLoggedIn: false
+        })
+>>>>>>> Stashed changes
       }),
       { name: "user-info" }
     )
